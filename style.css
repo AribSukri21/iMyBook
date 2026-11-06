@@ -1,0 +1,780 @@
+/* ==================================
+   1. GENERAL STYLING
+   Colours are stored as variables so they
+   are easy to change in one place.
+================================== */
+
+:root {
+    --bg-main: #F8FAF9;
+    --bg-soft: #EDF3EF;
+    --bg-card: #FFFFFF;
+    --primary: #4F7D6A;
+    --primary-hover: #3D6454;
+    --accent: #F3D8C7;
+    --text-main: #29352F;
+    --text-muted: #5F6E66;
+    --border: #DEE7E1;
+    --error: #B03A38;
+    --success: #327153;
+    --shadow: 0 2px 6px rgba(41, 53, 47, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-size: 1.4rem;
+    color: var(--text-main);
+}
+
+/* Visible keyboard focus for all interactive items */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* ==================================
+   2. HEADER AND NAVIGATION
+================================== */
+
+header {
+    background-color: var(--bg-card);
+    text-align: center;
+    padding: 22px 20px 16px;
+    border-bottom: 4px solid var(--accent);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+    color: var(--primary);
+}
+
+header p {
+    margin: 4px 0 0;
+    color: var(--text-muted);
+}
+
+nav {
+    background-color: var(--bg-soft);
+    border-bottom: 1px solid var(--border);
+    padding: 12px;
+    text-align: center;
+}
+
+nav a {
+    display: inline-block;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 22px;
+    margin: 3px 4px;
+    border-radius: 20px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+nav a:hover {
+    background-color: var(--accent);
+}
+
+nav a.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* ==================================
+   3. MAIN PAGE LAYOUT
+================================== */
+
+main {
+    max-width: 1000px;
+    margin: 25px auto;
+    padding: 0 15px;
+}
+
+section {
+    background-color: var(--bg-card);
+    padding: 24px;
+    margin-bottom: 22px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+section > p {
+    color: var(--text-muted);
+    margin: 0 0 8px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 15px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* ==================================
+   4. FORMS AND INPUTS
+================================== */
+
+label {
+    display: block;
+    margin-top: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 6px 0;
+    border: 1px solid #C5D2CA;
+    border-radius: 6px;
+    background-color: white;
+    color: var(--text-main);
+    font: inherit;
+    transition: border-color 0.2s;
+}
+
+input:hover,
+select:hover {
+    border-color: var(--primary);
+}
+
+input:focus,
+select:focus {
+    border-color: var(--primary);
+}
+
+input::placeholder {
+    color: #7D8A83;
+}
+
+/* Row that holds search boxes, dropdowns and buttons */
+.form-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.form-row input {
+    flex: 2;
+    min-width: 180px;
+    margin: 0;
+}
+
+.form-row select {
+    flex: 1;
+    min-width: 150px;
+    margin: 0;
+}
+
+/* Reading list form: keep fields a comfortable width */
+#bookForm {
+    max-width: 600px;
+}
+
+/* ==================================
+   5. BUTTONS
+================================== */
+
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    margin: 6px 0;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* Secondary button (for example Clear Form) */
+button.secondary {
+    background-color: white;
+    color: var(--text-main);
+    border: 1px solid #C5D2CA;
+}
+
+button.secondary:hover {
+    background-color: var(--bg-soft);
+}
+
+/* Delete button */
+button.danger {
+    background-color: var(--error);
+}
+
+button.danger:hover {
+    background-color: #8F2D2B;
+}
+
+/* ==================================
+   6. BOOK RESULT CARDS
+================================== */
+
+/* Three cards per row on wide windows */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+/* Message such as "No books displayed yet" uses the full row */
+.book-grid > p {
+    grid-column: 1 / -1;
+    color: var(--text-muted);
+}
+
+/* Card is a vertical flex box so the button can sit at the bottom */
+.book-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+    overflow-wrap: anywhere;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.book-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(41, 53, 47, 0.12);
+}
+
+/* Same cover size for every book */
+.book-card img {
+    width: 110px;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background-color: var(--bg-soft);
+}
+
+.book-card h3 {
+    margin: 4px 0 6px;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    color: var(--text-main);
+}
+
+.book-card p {
+    margin: 4px 0;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+}
+
+/* Button is pushed to the bottom of the card */
+.book-card button {
+    margin-top: auto;
+    align-self: flex-start;
+    padding: 9px 14px;
+    font-size: 0.92rem;
+}
+
+/* Small gap above the button when the text is short */
+.book-card p + button {
+    margin-top: auto;
+}
+
+/* ==================================
+   7. READING LIST
+================================== */
+
+/* Saved books are shown in two columns */
+#savedBooks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+#savedBooks > p {
+    grid-column: 1 / -1;
+}
+
+#bookCount {
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.saved-book {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 6px solid var(--primary);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: var(--shadow);
+    overflow-wrap: anywhere;
+}
+
+.saved-book h3 {
+    margin: 0 0 6px;
+    font-size: 1.15rem;
+    color: var(--text-main);
+}
+
+.saved-book p {
+    margin: 4px 0;
+    color: var(--text-muted);
+}
+
+.saved-book button {
+    margin: 10px 8px 0 0;
+    padding: 8px 14px;
+    font-size: 0.92rem;
+}
+
+/* Progress bar (Chrome / Electron) */
+progress {
+    display: block;
+    width: 100%;
+    height: 14px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 7px;
+    background-color: var(--bg-soft);
+    overflow: hidden;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+progress::-webkit-progress-bar {
+    background-color: var(--bg-soft);
+    border-radius: 7px;
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--primary);
+    border-radius: 7px;
+}
+
+/* ==================================
+   8. PROGRESS CALCULATOR
+================================== */
+
+#readingSpeed {
+    max-width: 240px;
+}
+
+#calculationResult {
+    margin-top: 15px;
+    padding: 14px 16px;
+    background-color: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-left: 6px solid var(--accent);
+    border-radius: 6px;
+}
+
+#calculationResult p {
+    margin: 4px 0;
+}
+
+/* Hide the result box when it is empty */
+#calculationResult:empty {
+    display: none;
+}
+
+/* ==================================
+   9. MESSAGES AND FEEDBACK
+================================== */
+
+.message {
+    font-weight: 600;
+    margin-top: 12px;
+    padding: 0;
+}
+
+/* Hide empty message areas so they take no space */
+.message:empty {
+    display: none;
+}
+
+.message.success,
+.message.error {
+    padding: 10px 14px;
+    border-radius: 6px;
+}
+
+.message.success {
+    background-color: #E6F3EC;
+    border: 1px solid #B8DCC8;
+}
+
+.message.error {
+    background-color: #FBEAEA;
+    border: 1px solid #EBC0BF;
+}
+
+.success {
+    color: var(--success);
+}
+
+.error {
+    color: var(--error);
+}
+
+/* ==================================
+   10. RESPONSIVE DESIGN
+================================== */
+
+/* Medium windows: two book cards per row */
+@media (max-width: 900px) {
+    .book-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Small windows: one column everywhere */
+@media (max-width: 650px) {
+    .book-grid,
+    #savedBooks {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-row input,
+    .form-row select {
+        min-width: 0;
+    }
+
+    section {
+        padding: 16px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    nav a {
+        padding: 10px 16px;
+    }
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+
+    .book-card:hover {
+        transform: none;
+    }
+}
+
+/* ==================================
+   11. DISCOVER PAGE: SIDE-BY-SIDE CARDS
+   Puts "Discover Books" (left) and
+   "Book Suggestions" (right) in one row.
+   Only affects the Discover Books page.
+================================== */
+
+/* main:has(#searchType) means "the main area that
+   contains the search dropdown", so the
+   Reading List page is not affected. */
+main:has(#searchType) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: stretch;
+}
+
+/* The grid gap now handles spacing between cards */
+main:has(#searchType) section {
+    margin-bottom: 0;
+}
+
+/* Book Results stays full width below the two cards */
+main:has(#searchType) section:last-child {
+    grid-column: 1 / -1;
+}
+
+/* Stack the controls inside the two narrower cards */
+main:has(#searchType) .form-row {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+main:has(#searchType) .form-row input,
+main:has(#searchType) .form-row select {
+    min-width: 0;
+}
+
+/* Small windows: go back to one card per row */
+@media (max-width: 800px) {
+    main:has(#searchType) {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================================
+   12. READING LIST PAGE: MANAGE + CALCULATOR
+   Makes the form and the calculator cards
+   more interesting and easier to use.
+   (:has(#bookForm) means "only the Reading
+   List page", so the Discover page is safe.)
+================================== */
+
+/* Put the form (left) and calculator (right) side by side */
+main:has(#bookForm) {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 22px;
+    align-items: start;
+}
+
+main:has(#bookForm) section {
+    margin-bottom: 0;
+}
+
+/* "My Saved Books" stays full width underneath */
+main:has(#bookForm) section:last-child {
+    grid-column: 1 / -1;
+}
+
+/* ---------- Manage Reading List card ---------- */
+
+/* Sage stripe on top of the card */
+section:has(#bookForm) {
+    border-top: 5px solid var(--primary);
+}
+
+/* Card gets a green border while you are typing in it */
+section:has(#bookForm):focus-within {
+    border-color: var(--primary);
+}
+
+/* Form uses two columns. Most fields take the full width. */
+#bookForm {
+    max-width: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 14px;
+    grid-auto-flow: row dense; /* lets Pages Read move up beside Total Pages */
+    margin-top: 6px;
+}
+
+#bookForm > * {
+    grid-column: 1 / -1;
+}
+
+/* Total Pages (left) and Pages Read (right) share one row */
+#bookForm label[for="totalPages"],
+#bookForm #totalPages {
+    grid-column: 1;
+}
+
+#bookForm label[for="pagesRead"],
+#bookForm #pagesRead {
+    grid-column: 2;
+}
+
+/* Small label style with a peach dot */
+#bookForm label {
+    margin-top: 10px;
+    font-size: 0.92rem;
+}
+
+#bookForm label::before {
+    content: "• ";
+    color: #E3A988;
+}
+
+#bookForm input,
+#bookForm select {
+    background-color: #FCFDFC;
+}
+
+/* Soft green glow on the field you are typing in */
+#bookForm input:focus,
+#bookForm select:focus {
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(79, 125, 106, 0.2);
+}
+
+/* Save button is big and prominent, Clear Form is smaller */
+#bookForm .form-row {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+    flex-wrap: nowrap;
+}
+
+#bookForm .form-row button {
+    margin: 0;
+}
+
+#saveBtn {
+    flex: 2;
+    padding: 13px 18px;
+    font-size: 1.05rem;
+    box-shadow: var(--shadow);
+}
+
+#cancelBtn {
+    flex: 1;
+}
+
+/* ---------- Reading Progress Calculator card ---------- */
+
+/* Warm peach card so it looks different from the form */
+section:has(#readingSpeed) {
+    background-color: #FDF8F4;
+    border-top: 5px solid #E3A988;
+}
+
+#readingSpeed {
+    max-width: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Calculate button fills the card width */
+#calculateBtn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 13px 18px;
+    font-size: 1.05rem;
+}
+
+/* Result looks like a small "results panel" */
+#calculationResult {
+    margin-top: 18px;
+    padding: 16px;
+    background-color: white;
+    border: 1px solid var(--border);
+    border-left: 6px solid var(--primary);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    line-height: 1.7;
+}
+
+#calculationResult p {
+    margin: 6px 0;
+    padding-bottom: 6px;
+    border-bottom: 1px dotted var(--border);
+}
+
+#calculationResult p:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#calculationResult strong {
+    color: var(--primary);
+}
+
+/* ---------- Small windows ---------- */
+
+/* Cards stack on top of each other */
+@media (max-width: 850px) {
+    main:has(#bookForm) {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Very small windows: every form field gets its own row */
+@media (max-width: 480px) {
+    #bookForm label[for="totalPages"],
+    #bookForm #totalPages,
+    #bookForm label[for="pagesRead"],
+    #bookForm #pagesRead {
+        grid-column: 1 / -1;
+    }
+
+    #bookForm .form-row {
+        flex-wrap: wrap;
+    }
+}
+
+/* ==================================
+   13. SAVED BOOKS: COVER ON THE RIGHT
+   Details on the left, cover on the right.
+================================== */
+
+.saved-book {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+/* Details take all the remaining space */
+.saved-book-info {
+    flex: 1;
+    min-width: 0;   /* lets long text wrap instead of stretching the card */
+}
+
+/* Cover keeps the same size on every card */
+.saved-cover {
+    width: 90px;
+    height: 130px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background-color: var(--bg-soft);
+}
+
+/* Placeholder for books without a cover */
+.no-cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Very small windows: cover goes smaller */
+@media (max-width: 480px) {
+    .saved-cover {
+        width: 70px;
+        height: 100px;
+    }
+}
+
+#calculationResult h3 {
+    margin: 0 0 10px;
+    color: var(--primary);
+    font-size: 1.1rem;
+}

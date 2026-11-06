@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+                   script-src 'self';
+                   style-src 'self';
+                   img-src 'self' https://covers.openlibrary.org data:;
+                   connect-src https://openlibrary.org;">
+
+    <title>iMyBook - Discover Books</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Application Header -->
+    <header>
+        <h1>iMyBook</h1>
+        <p>Simple Reading Book Application</p>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <a href="index.html" class="active">Discover Books</a>
+        <a href="reading-list.html">My Reading List</a>
+    </nav>
+
+    <main>
+
+        <!-- Book Search Section -->
+        <section>
+            <h2>Discover Books</h2>
+            <p>Search for books by title, author or subject.</p>
+
+            <div class="form-row">
+                <select id="searchType">
+                    <option value="title">Book Title</option>
+                    <option value="author">Author</option>
+                    <option value="subject">Subject</option>
+                </select>
+
+                <input type="text" id="searchInput"
+                       placeholder="Enter your search keyword">
+
+                <button id="searchBtn">Search Books</button>
+            </div>
+
+            <p id="searchMessage" class="message" role="status"></p>
+        </section>
+
+        <!-- Book Suggestion Section -->
+        <section>
+            <h2>Book Suggestions</h2>
+            <p>Select a reading category to receive suggestions.</p>
+
+            <div class="form-row">
+                <select id="category">
+                    <option value="">Select Category</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="science">Science</option>
+                    <option value="history">History</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="romance">Romance</option>
+                </select>
+
+                <button id="suggestBtn">Suggest Books</button>
+            </div>
+
+            <p id="suggestMessage" class="message" role="status"></p>
+        </section>
+
+        <!-- API Book Results -->
+        <section>
+            <h2>Book Results</h2>
+            <div id="bookResults" class="book-grid">
+                <p>No books displayed yet. Start by searching.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>iMyBook | CSC2923 Final Project</p>
+    </footer>
+
+</body>
+</html>
